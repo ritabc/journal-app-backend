@@ -28,4 +28,6 @@ Things you may want to cover:
 - Deployment instructions
   -- `$ rails db:migrate db:test:prepare`
 
-- ...
+- Resources/Tutorials Referenced
+  -- https://medium.com/better-programming/build-a-rails-api-with-jwt-61fb8a52d833
+  -- https://medium.com/compiling/how-to-implement-google-sign-in-for-a-ruby-web-app-b8b1e50a3a51
