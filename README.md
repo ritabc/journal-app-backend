@@ -5,20 +5,27 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+- Ruby version: 2.7.2
 
-* System dependencies
+- Dependencies
+  -- Postgres
 
-* Configuration
+- Gems Added
+  -- bcrypt
+  -- jwt
 
-* Database creation
+- Configuration
 
-* Database initialization
+- Database creation
+  `$ rails db:create` to create databases in Postgres
 
-* How to run the test suite
+- Database initialization
 
-* Services (job queues, cache servers, search engines, etc.)
+- How to run the test suite
 
-* Deployment instructions
+- Services (job queues, cache servers, search engines, etc.)
 
-* ...
+- Deployment instructions
+  -- `$ rails db:migrate db:test:prepare`
+
+- ...
