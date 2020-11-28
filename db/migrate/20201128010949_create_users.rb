@@ -1,10 +1,9 @@
 class CreateUsers < ActiveRecord::Migration[6.0]
   def change
     create_table :users do |t|
-      t.string :email
-      t.string :family_name
-      t.string :given_name
-
+      # TODO: the following is for setup: do not actually store google id in DB!
+      t.string :google_id
+      
       t.timestamps
     end
   end
