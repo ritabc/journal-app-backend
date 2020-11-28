@@ -11,8 +11,8 @@ Things you may want to cover:
   -- Postgres
 
 - Gems Added
-  -- bcrypt
   -- jwt
+  -- google-id-token
 
 - Configuration
 
@@ -31,3 +31,4 @@ Things you may want to cover:
 - Resources/Tutorials Referenced
   -- https://medium.com/better-programming/build-a-rails-api-with-jwt-61fb8a52d833
   -- https://medium.com/compiling/how-to-implement-google-sign-in-for-a-ruby-web-app-b8b1e50a3a51
+  -- https://www.pluralsight.com/guides/token-based-authentication-with-ruby-on-rails-5-api
