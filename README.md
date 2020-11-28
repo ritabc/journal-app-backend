@@ -17,7 +17,7 @@ Things you may want to cover:
 - Configuration
 
 - Database creation
-  `$ rails db:create` to create databases in Postgres
+  `$ rails db:create` to create databases in Postgres (journal_backend_development and journal_backend_test)
 
 - Database initialization
 
