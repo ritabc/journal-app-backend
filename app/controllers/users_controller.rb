@@ -1,14 +1,16 @@
 class UsersController < ApplicationController
   before_action :authenticator
-
+  # In general, every action should first call authorized method (as defined by app_controller)
+  # Skip it before create and login here
+  skip_before_action :authorized, only: [:create, :login]
+  
   def create
     if @authenticator.valid_credentials?(user_params[:google_id_token])
       payload = @authenticator.payload
       @user = User.create(email: payload["email"], google_account_id: payload["sub"], given_name: payload["given_name"], family_name: payload["family_name"])
       if @user.valid?
-        # token = encode_token(user_id: @user.google_account_id)
-        # render json: {user: @user, token: token}
-        render json: {user: @user}
+        token = encode_token(account_id: @user.google_account_id)
+        render json: {user: @user, token: token}
       else
         render json: {error: "Invalid username or password"}
       end
@@ -22,15 +24,18 @@ class UsersController < ApplicationController
       payload = @authenticator.payload
       @user = User.find_by(google_account_id: payload["sub"])
       if @user 
-        # token = encode_token(user_id: @user.google_account_id)
-        # render json: {user: @user, token: token}
-        render json: {user: @user}
-      else 
+        token = encode_token(account_id: @user.google_account_id)
+        render json: {user: @user, token: token}
+      else
         render json: {error: "User not found"}
       end
     else
       render json: {error: "Invalid id token received"}
     end
+  end
+
+  def auto_login
+    render json: @user
   end
 
   private
