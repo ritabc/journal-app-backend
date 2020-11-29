@@ -2,7 +2,9 @@ class ApplicationController < ActionController::API
   before_action :authorized
 
   def encode_token(payload)
-    JWT.encode(payload, Rails.application.credentials.secret_key_base)
+    exp = Time.now.to_i + 4 * 3600
+    exp_payload = { data: payload, exp: exp }
+    JWT.encode(exp_payload, Rails.application.credentials.secret_key_base)
   end
   
   # private
@@ -26,7 +28,7 @@ class ApplicationController < ActionController::API
 
   def logged_in_user
     if decoded_token
-      account_id = decoded_token[0]['account_id']
+      account_id = decoded_token[0]['data']['account_id']
       @user = User.find_by(google_account_id: account_id)
     end
   end
