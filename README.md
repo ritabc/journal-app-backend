@@ -1,9 +1,6 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+An API using Google Sign In and JWT for Authentication and Authorization. A backend API for React Journaler app https://github.com/ritabc/journal-app-frontend. Deployed using Heroku: https://enigmatic-beyond-14262.herokuapp.com
 
 - Ruby version: 2.7.2
 
@@ -13,6 +10,9 @@ Things you may want to cover:
 - Gems Added
   -- jwt
   -- google-id-token
+
+- Configuration:
+  -- Add `google_client_id: <<value>>'
 
 - Database creation
   `$ rails db:create` to create databases in Postgres (journal_backend_development and journal_backend_test)
