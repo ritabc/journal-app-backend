@@ -14,16 +14,10 @@ Things you may want to cover:
   -- jwt
   -- google-id-token
 
-- Configuration
-
 - Database creation
   `$ rails db:create` to create databases in Postgres (journal_backend_development and journal_backend_test)
 
-- Database initialization
-
 - How to run the test suite
-
-- Services (job queues, cache servers, search engines, etc.)
 
 - Deployment instructions
   -- `$ rails db:migrate db:test:prepare`
@@ -32,3 +26,7 @@ Things you may want to cover:
   -- https://medium.com/better-programming/build-a-rails-api-with-jwt-61fb8a52d833
   -- https://medium.com/compiling/how-to-implement-google-sign-in-for-a-ruby-web-app-b8b1e50a3a51
   -- https://www.pluralsight.com/guides/token-based-authentication-with-ruby-on-rails-5-api
+
+- To access user's own journals:
+  - Use Google Signin on an app like [this](https://github.com/ritabc/journal-app-frontend) one, and Sign In.
+  - Copy the 'Token ID', and add it to the 'Authorization' header on the request: GET .../journals
