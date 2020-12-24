@@ -29,7 +29,7 @@ Things you may want to cover:
 
 - To access user's own journals:
   - Use Google Signin on an app like [this](https://github.com/ritabc/journal-app-frontend) one, and Sign In.
-  - POST a request to https://enigmatic-beyond-14262.herokuapp.com/login with body:
+  - POST a request to https://enigmatic-beyond-14262.herokuapp.com/login (or .../signup if this is the first time) with body:
   ```json
   {
     "user": {
