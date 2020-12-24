@@ -29,4 +29,12 @@ Things you may want to cover:
 
 - To access user's own journals:
   - Use Google Signin on an app like [this](https://github.com/ritabc/journal-app-frontend) one, and Sign In.
-  - Copy the 'Token ID', and add it to the 'Authorization' header on the request: GET .../journals
+  - POST a request to https://enigmatic-beyond-14262.herokuapp.com/login with body:
+  ```json
+  {
+    "user": {
+      "google_id_token": "<<Your Token ID here>>"
+    }
+  }
+  ```
+  - Copy the 'Token', and add it to the 'Authorization' header on the request: GET .../journals
