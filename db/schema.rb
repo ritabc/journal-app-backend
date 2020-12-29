@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_29_032411) do
+ActiveRecord::Schema.define(version: 2020_12_29_042931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,17 @@ ActiveRecord::Schema.define(version: 2020_11_29_032411) do
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_journals_on_user_id"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.bigint "journal_id", null: false
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["journal_id"], name: "index_notes_on_journal_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -31,4 +42,6 @@ ActiveRecord::Schema.define(version: 2020_11_29_032411) do
     t.string "family_name"
   end
 
+  add_foreign_key "journals", "users", on_delete: :cascade
+  add_foreign_key "notes", "journals", on_delete: :cascade
 end

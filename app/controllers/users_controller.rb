@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include SeedUserData
   before_action :authenticator
   # In general, every action should first call authorized method (as defined by app_controller)
   # Skip it before create and login here
@@ -9,6 +10,7 @@ class UsersController < ApplicationController
       payload = @authenticator.payload
       @user = User.create(email: payload["email"], google_account_id: payload["sub"], given_name: payload["given_name"], family_name: payload["family_name"])
       if @user.valid?
+        seed_initial_user_data @user.id
         token = encode_token(account_id: @user.google_account_id)
         render json: {user: @user, token: token}
       else
