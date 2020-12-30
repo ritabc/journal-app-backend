@@ -1,41 +1,62 @@
  class NotesController < ApplicationController
   before_action :set_note, only: [:show, :update, :destroy]
 
-  # GET /notes
+  # GET journal/:journal_id/notes
   def index
-    @notes = Note.all
-
-    render json: @notes
-  end
-
-  # GET /notes/1
-  def show
-    render json: @note
-  end
-
-  # POST /notes
-  def create
-    @note = Note.new(note_params)
-
-    if @note.save
-      render json: @note, status: :created, location: @note
-    else
-      render json: @note.errors, status: :unprocessable_entity
+    journal = Journal.find(params[:journal_id])
+    if @user.id == journal.user_id
+      @notes = Note.where(journal_id: journal.id)
+      render json: @notes
+    else 
+      render json: {error: "User not authorized"}
     end
   end
 
-  # PATCH/PUT /notes/1
-  def update
-    if @note.update(note_params)
+  # GET journal/:journal_id/notes/1
+  def show
+    journal = Journal.find(params[:journal_id])
+    if @user.id == journal.user_id
       render json: @note
     else
-      render json: @note.errors, status: :unprocessable_entity
+      render json: {error: "User not authorized"}
     end
   end
 
-  # DELETE /notes/1
+  # POST journals/journal_id/notes
+  def create
+    journal = Journal.find(params[:journal_id].to_i)
+    if @user.id == journal.user_id
+      @note = Note.new(note_params)
+      @note.journal_id = journal.id
+      if @note.save
+        render json: @note, status: :created
+      else
+        render json: @note.errors, status: :unprocessable_entity
+      end
+    else 
+      render json: {error: "User not authorized"}
+    end
+  end
+
+  # # PATCH/PUT /notes/1
+  # def update
+  #   if @note.update(note_params)
+  #     render json: @note
+  #   else
+  #     render json: @note.errors, status: :unprocessable_entity
+  #   end
+  # end
+
+  # DELETE journals/journal_id/notes/note_id
   def destroy
-    @note.destroy
+    journal = Journal.find(params[:journal_id])
+    note_id = @note.id.to_s
+    if @user.id == journal.user_id && @note.journal_id == journal.id
+      @note.destroy
+      render json: {msg: `Note ##{note_id} successfully destroyed`}
+    else
+      render json: {error: "User not authorized"}
+    end
   end
 
   private
@@ -46,6 +67,6 @@
 
     # Only allow a trusted parameter "white list" through.
     def note_params
-      params.require(:note).permit(:journal_id)
+      params.require(:note).permit(:title, :content)
     end
 end
