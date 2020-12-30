@@ -40,6 +40,10 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  def wipe_seeded
+    wipe_seeds @user.id
+  end
+
   private
 
   # Should this be private? 

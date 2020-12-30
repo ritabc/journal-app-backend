@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     resources :notes, except: [:update]
   end
 
+  delete "/wipe_seeded", to: "users#wipe_seeded"
 
   post "/signup", to: "users#create"
   post "/login", to: "users#login"

@@ -33,4 +33,13 @@ module SeedUserData
     travel_id = save_journal(u_id, "Travel Notes")
     save_note(travel_id, "Antarctica", "I was finally able to travel to the Antarctic last month! It was beautiful, but so cold - I'm surprised that I still have all my fingers and toes!", DateTime.new(2018, 12,2))
   end
+
+  # Completely delete the following seeded journals and their notes: Recipes, Daily Notes, Dream Diary, Introspective Notes, Travel Notes
+  def wipe_seeds(u_id)
+    Journal.destroy_by(user_id: u_id, name: "Recipes")
+    Journal.destroy_by(user_id: u_id, name: "Daily Notes")
+    Journal.destroy_by(user_id: u_id, name: "Dream Diary")
+    Journal.destroy_by(user_id: u_id, name: "Introspective Notes")
+    Journal.destroy_by(user_id: u_id, name: "Travel Notes")
+  end
 end
