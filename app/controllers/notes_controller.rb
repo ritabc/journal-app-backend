@@ -1,4 +1,6 @@
- class NotesController < ApplicationController
+require "securerandom"
+
+class NotesController < ApplicationController
   before_action :set_note, only: [:show, :update, :destroy]
 
   # GET journal/:journal_id/notes
@@ -28,6 +30,7 @@
     if @user.id == journal.user_id
       @note = Note.new(note_params)
       @note.journal_id = journal.id
+      @note.id = SecureRandom.uuid
       if @note.save
         render json: @note, status: :created
       else

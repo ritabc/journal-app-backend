@@ -1,3 +1,5 @@
+require "securerandom"
+
 class JournalsController < ApplicationController
   before_action :set_journal, only: [:show, :update, :destroy]
 
@@ -21,6 +23,7 @@ class JournalsController < ApplicationController
   def create
     @journal = Journal.new(journal_params)
     @journal.user_id = @user.id
+    @journal.id = SecureRandom.uuid
     if @journal.save
       render json: @journal, status: :created, location: @journal
     else

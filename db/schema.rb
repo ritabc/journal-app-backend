@@ -10,22 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_29_042931) do
+ActiveRecord::Schema.define(version: 2021_01_03_041408) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "journals", force: :cascade do |t|
+  create_table "journals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id"
+    t.uuid "user_id"
     t.index ["user_id"], name: "index_journals_on_user_id"
   end
 
-  create_table "notes", force: :cascade do |t|
-    t.bigint "journal_id", null: false
+  create_table "notes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "journal_id", null: false
     t.string "title"
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
@@ -33,7 +34,7 @@ ActiveRecord::Schema.define(version: 2020_12_29_042931) do
     t.index ["journal_id"], name: "index_notes_on_journal_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "google_account_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -42,6 +43,4 @@ ActiveRecord::Schema.define(version: 2020_12_29_042931) do
     t.string "family_name"
   end
 
-  add_foreign_key "journals", "users", on_delete: :cascade
-  add_foreign_key "notes", "journals", on_delete: :cascade
 end

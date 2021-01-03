@@ -1,3 +1,5 @@
+require "securerandom"
+
 class UsersController < ApplicationController
   include SeedUserData
   before_action :authenticator
@@ -8,7 +10,7 @@ class UsersController < ApplicationController
   def create
     if @authenticator.valid_credentials?(user_params[:google_id_token])
       payload = @authenticator.payload
-      @user = User.create(email: payload["email"], google_account_id: payload["sub"], given_name: payload["given_name"], family_name: payload["family_name"])
+      @user = User.create(id: SecureRandom.uuid, email: payload["email"], google_account_id: payload["sub"], given_name: payload["given_name"], family_name: payload["family_name"])
       if @user.valid?
         seed_initial_user_data @user.id
         token = encode_token(account_id: @user.google_account_id)
