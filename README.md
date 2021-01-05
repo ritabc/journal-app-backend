@@ -1,40 +1,20 @@
-# README
+# Backend API for Journal Recorder
 
-An API using Google Sign In and JWT for Authentication and Authorization. A backend API for React Journaler app https://github.com/ritabc/journal-app-frontend. Deployed using Heroku: https://enigmatic-beyond-14262.herokuapp.com
+An API with Google Sign In authentication and JWT authorization. The backend for the [Journal Recorder](https://github.com/ritabc/journal-app-frontend) application which can be found here: https://journal-recorder.herokuapp.com/
+
+## Models and Associations
+
+The main models are users, journals, and notes. Notes belong to a journal, and journals belong to a user.
+
+## Uses
 
 - Ruby version: 2.7.2
+- Postgres
+- jwt gem
+- google-id-token gem
 
-- Dependencies
-  -- Postgres
+## Resources/Tutorials Referenced
 
-- Gems Added
-  -- jwt
-  -- google-id-token
-
-- Configuration:
-  -- Add `google_client_id: <<value>>'
-
-- Database creation
-  `$ rails db:create` to create databases in Postgres (journal_backend_development and journal_backend_test)
-
-- How to run the test suite
-
-- Deployment instructions
-  -- `$ rails db:migrate db:test:prepare`
-
-- Resources/Tutorials Referenced
-  -- https://medium.com/better-programming/build-a-rails-api-with-jwt-61fb8a52d833
-  -- https://medium.com/compiling/how-to-implement-google-sign-in-for-a-ruby-web-app-b8b1e50a3a51
-  -- https://www.pluralsight.com/guides/token-based-authentication-with-ruby-on-rails-5-api
-
-- To access user's own journals:
-  - Use Google Signin on an app like [this](https://github.com/ritabc/journal-app-frontend) one, and Sign In.
-  - POST a request to https://enigmatic-beyond-14262.herokuapp.com/login (or .../signup if this is the first time) with body:
-  ```json
-  {
-    "user": {
-      "google_id_token": "<<Your Token ID here>>"
-    }
-  }
-  ```
-  - Copy the 'Token', and add it to the 'Authorization' header on the request: GET .../journals
+- https://medium.com/better-programming/build-a-rails-api-with-jwt-61fb8a52d833
+- https://medium.com/compiling/how-to-implement-google-sign-in-for-a-ruby-web-app-b8b1e50a3a51
+- https://www.pluralsight.com/guides/token-based-authentication-with-ruby-on-rails-5-api
