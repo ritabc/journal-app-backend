@@ -26,7 +26,7 @@ class NotesController < ApplicationController
 
   # POST journals/journal_id/notes
   def create
-    journal = Journal.find(params[:journal_id].to_i)
+    journal = Journal.find(params[:journal_id])
     if @user.id == journal.user_id
       @note = Note.new(note_params)
       @note.journal_id = journal.id
