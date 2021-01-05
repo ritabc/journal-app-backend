@@ -10,8 +10,6 @@ class UsersController < ApplicationController
   def create
     if @authenticator.valid_credentials?(user_params[:google_id_token])
       payload = @authenticator.payload
-      puts payload
-      puts user_params[:google_id_token]
       @user = User.create(id: SecureRandom.uuid, email: payload["email"], google_account_id: payload["sub"], given_name: payload["given_name"], family_name: payload["family_name"])
       if @user.valid?
         seed_initial_user_data @user.id
