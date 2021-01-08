@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 
   # Should this be private? 
   def authenticator
-    @authenticator = Authenticator.new(Rails.application.credentials.google_client_id)
+    @authenticator ||= Authenticator.new(Rails.application.credentials.google_client_id)
   end
 
   def user_params 
