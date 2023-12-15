@@ -22,7 +22,7 @@ module SeedUserData
     save_note(daily_id, "Halloween 2020", "Dressed the dog as a horse for Halloween. She was a little chilly but a good sport about it.", DateTime.new(2020, 10,31))
     save_note(daily_id, "Dog Apopted!", "Adopted the new dog! She is tiny (8lbs!) and very playful. She was adopted from Cause for Paws NC.", DateTime.new(2020, 10,10))
     save_note(daily_id, "Restless", "We're getting restless and are thinking about adopting a dog. We like going on walks and would love to have a furry family member to explore the outdoors with.", DateTime.new(2020, 9,1))
-    save_note(daily_id, "WFH 3 Month Anniversary", "We have officially been working form home for 3 months. It feels like less than that and more than that at the same time", DateTime.new(2020, 6, 15))
+    save_note(daily_id, "WFH 3 Month Anniversary", "We have officially been working from home for 3 months. It feels like less than that and more than that at the same time", DateTime.new(2020, 6, 15))
 
     dream_id = save_journal(u_id, "Dream Diary")
     save_note(dream_id, "Flying", "Last night I flew around the sky as a witch. But instead of a broomstick, I was perched on a mop. I wonder what it means?", DateTime.new(2020, 11,18))
