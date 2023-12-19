@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :journals, except: [:update] do
-    resources :notes, except: [:update]
+    resources :notes
   end
 
   delete "/wipe_seeded", to: "users#wipe_seeded"

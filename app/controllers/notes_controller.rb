@@ -1,7 +1,7 @@
 require "securerandom"
 
 class NotesController < ApplicationController
-  before_action :set_note, only: [:show, :update, :destroy]
+  before_action :set_note, only: [:show, :update, :destroy, :edit]
 
   # GET journal/:journal_id/notes
   def index
@@ -41,14 +41,29 @@ class NotesController < ApplicationController
     end
   end
 
-  # # PATCH/PUT /notes/1
-  # def update
-  #   if @note.update(note_params)
-  #     render json: @note
-  #   else
-  #     render json: @note.errors, status: :unprocessable_entity
-  #   end
-  # end
+  # GET /journals/journal_id/notes/note_id/edit (data for note edit form)
+  def edit
+    journal = Journal.find(params[:journal_id])
+    if @user.id == journal.user_id
+      render json: @note
+    else 
+      render json: {error: "User not authorized"}
+    end
+  end
+
+  # PATCH/PUT journals/journal_id/notes/note_id
+  def update
+    journal = Journal.find(params[:journal_id])
+    if @user.id == journal.user_id
+      if @note.update(note_params)
+        render json: @note
+      else
+        render json: @note.errors, status: :unprocessable_entity
+      end
+    else
+      render json: {error: "User not authorized"}
+    end
+  end
 
   # DELETE journals/journal_id/notes/note_id
   def destroy
