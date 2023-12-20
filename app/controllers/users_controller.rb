@@ -47,8 +47,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  # Should this be private? 
   def authenticator
     @authenticator ||= Authenticator.new(Rails.application.credentials.google_client_id)
   end
