@@ -32,13 +32,13 @@ class JournalsController < ApplicationController
   end
 
   # PATCH/PUT /journals/1
-  # def update
-  #   if @journal.update(journal_params)
-  #     render json: @journal
-  #   else
-  #     render json: @journal.errors, status: :unprocessable_entity
-  #   end
-  # end
+  def update
+    if @journal.update(journal_params)
+      render json: @journal
+    else
+      render json: @journal.errors, status: :unprocessable_entity
+    end
+  end
 
   # DELETE /journals/1
   def destroy

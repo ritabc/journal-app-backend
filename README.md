@@ -1,6 +1,6 @@
 # Backend API for Journal Recorder
 
-An API with Google Sign In authentication and JWT authorization. The backend for the [Journal Recorder](https://github.com/ritabc/journal-app-frontend) application which can be found here: https://journal-recorder.herokuapp.com/
+An API with Google Sign In authentication and JWT authorization. The backend for the [Journal Recorder](https://github.com/ritabc/journal-app-frontend) application.
 
 ## Models and Associations
 

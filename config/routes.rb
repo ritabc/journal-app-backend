@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :journals, except: [:update] do
+  resources :journals do
     resources :notes
   end
 
