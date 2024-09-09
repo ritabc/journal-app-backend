@@ -71,15 +71,15 @@ test:
 # On Heroku and other platform providers, you may have a full connection URL
 # available as an environment variable. For example:
 #
-#   DATABASE_URL="postgres://myuser:mypass@localhost/somedatabase"
+DATABASE_URL: postgres://postgres:Y9LrNb1rGVaX4X6@journal-backend-db.flycast:5432
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
 production:
-  <<: *default
-  database: journal_backend_production
-  username: journal_backend
-  password: <%= ENV['JOURNAL_BACKEND_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+#
+# production:
+#   <<: *default
+#   database: journal_backend_production
+#   username: journal_backend
+#   password: <%= ENV['JOURNAL_BACKEND_DATABASE_PASSWORD'] %>

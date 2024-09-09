@@ -8,7 +8,7 @@ The main models are users, journals, and notes. Notes belong to a journal, and j
 
 ## Uses
 
-- Ruby version: 2.7.2
+- Ruby version: 3.3.5
 - Postgres
 - jwt gem
 - google-id-token gem
