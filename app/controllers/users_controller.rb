@@ -28,12 +28,12 @@ class UsersController < ApplicationController
     user_params[:google_id_token]
     begin
       payload = Google::Auth::IDTokens.verify_oidc user_params[:google_id_token], aud: Rails.application.credentials.google_client_id
-    rescue Exception => e
-      puts e
-    end
-    puts payload
-    if payload.nil?
-      render json: {error: "Invalid id token received"}
+    rescue StandardError => e
+    #   puts e
+    # end
+    # puts payload
+    # if payload.nil?
+      render json: {error: "Invalid id token received: " + e}
     else
       @user = User.find_by(google_account_id: payload["sub"])
       if @user 
