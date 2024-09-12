@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     user_params[:google_id_token]
     begin
       payload = Google::Auth::IDTokens.verify_oidc user_params[:google_id_token], aud: Rails.application.credentials.google_client_id
-    rescue StandardError => e
+    rescue Exception => e
       puts e
     end
     puts payload
