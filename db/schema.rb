@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_20_185856) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_09_160131) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -40,6 +40,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_20_185856) do
     t.string "email"
     t.string "given_name"
     t.string "family_name"
+    t.string "token"
+    t.integer "token_expires_at"
+    t.string "refresh_token"
   end
-
 end

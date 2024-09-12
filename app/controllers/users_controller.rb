@@ -8,9 +8,11 @@ class UsersController < ApplicationController
   
   def create
     puts "create"
-    payload = Google::Auth::IDTokens.verify_oidc user_params[:google_id_token], aud: Rails.application.credentials.google_client_id
-    if payload.nil?
-      render json: {error: "Invalid id token received"}
+    begin
+      payload = Google::Auth::IDTokens.verify_oidc user_params[:google_id_token], aud: Rails.application.credentials.google_client_id
+    rescue => exception
+      puts exception.backtrace
+      render json: {error: "Invalid id token received: " + exception.backtrace}
     else
       @user = User.create(id: SecureRandom.uuid, email: payload["email"], google_account_id: payload["sub"], given_name: payload["given_name"], family_name: payload["family_name"])
       if @user.valid?
@@ -28,12 +30,11 @@ class UsersController < ApplicationController
     user_params[:google_id_token]
     begin
       payload = Google::Auth::IDTokens.verify_oidc user_params[:google_id_token], aud: Rails.application.credentials.google_client_id
-    rescue StandardError => e
-    #   puts e
-    # end
+    rescue => exception
+      puts exception.backtrace
     # puts payload
     # if payload.nil?
-      render json: {error: "Invalid id token received: " + e}
+      render json: {error: "Invalid id token received: " + exception.backtrace}
     else
       @user = User.find_by(google_account_id: payload["sub"])
       if @user 
