@@ -26,7 +26,11 @@ class UsersController < ApplicationController
   def login
     puts user_params[:google_id_token]
     user_params[:google_id_token]
-    payload = Google::Auth::IDTokens.verify_oidc user_params[:google_id_token], aud: Rails.application.credentials.google_client_id
+    begin
+      payload = Google::Auth::IDTokens.verify_oidc user_params[:google_id_token], aud: Rails.application.credentials.google_client_id
+    rescue StandardError => e
+      puts e
+    end
     puts payload
     if payload.nil?
       render json: {error: "Invalid id token received"}
