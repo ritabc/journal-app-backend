@@ -1,10 +1,19 @@
 class ApplicationController < ActionController::API
   before_action :authorized
+  after_filter :cors_set_access_control_headers
 
   def encode_token(payload)
     exp = Time.now.to_i + 4 * 3600
     exp_payload = { data: payload, exp: exp }
     JWT.encode(exp_payload, Rails.application.credentials.secret_key_base)
+  end
+  
+
+  def cors_set_access_control_headers
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET, OPTIONS'
+    headers['Access-Control-Request-Method'] = '*'
+    headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   end
   
   # private

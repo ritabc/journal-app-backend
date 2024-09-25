@@ -34,7 +34,7 @@ class UsersController < ApplicationController
       puts exception.backtrace
     # puts payload
     # if payload.nil?
-      render json: {error: "Invalid id token received: " + exception.backtrace}
+      render json: {error: "Invalid id token received: " + exception.full_message}
     else
       @user = User.find_by(google_account_id: payload["sub"])
       if @user 
